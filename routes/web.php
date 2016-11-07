@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Mistake;
 Route::get('/', function () {
-    return view('welcome');
+    return view('Mistake.index', [
+        "mistakes"=>Mistake::get(),
+    ]);
 });
+
+Route::resource('mistake', 'MistakeController');

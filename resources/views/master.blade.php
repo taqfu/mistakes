@@ -65,6 +65,6 @@
         </style>
     </head>
     <body>
-       @section('content') 
+       @yield('content') 
     </body>
 </html>
