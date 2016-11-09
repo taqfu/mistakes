@@ -7,8 +7,8 @@
 
         <title>Mistakes</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+i       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
         <!-- Styles -->
         <style>
@@ -48,6 +48,9 @@
             .title {
                 font-size: 84px;
             }
+            .hidden{
+                display:none;
+            }
 
             .links > a {
                 color: #636b6f;
@@ -62,9 +65,18 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .margin-left{
+                margin-left:20px;
+            }
         </style>
     </head>
     <body>
        @yield('content') 
     </body>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+   
+    <script src="js/js.js"></script> 
+
 </html>

@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('mistake', 'MistakeController');
+Route::resource('incident', 'IncidentController');

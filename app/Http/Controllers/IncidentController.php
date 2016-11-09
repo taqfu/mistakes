@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Incident;
-use App\Mistake;
 
-class MistakeController extends Controller
+class IncidentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,20 +34,7 @@ class MistakeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name'=>'required|string|max:255|unique:mistakes,name',
-            'incident'=>'required|string|max:22000',
-        ]);
-        $mistake = new Mistake;
-        $mistake->name = $request->name;
-        $mistake->save();
-        $incident = new Incident;
-        $incident->description = $request->incident;
-        $incident->mistake_id = $mistake->id;
-        $incident->when = date("Y-m-d H:i:s");
-        $incident->save();
-        return back();
-        
+        //
     }
 
     /**
@@ -94,12 +79,6 @@ class MistakeController extends Controller
      */
     public function destroy($id)
     {
-        Mistake::find($id)->destroy();
-        $incidents = Incident::where('mistake_id', $id)->get();
-        foreach ($incident as $incindent){
-            $incident->mistake_id=0;
-            $incident->save();
-        }
-        
+        //
     }
 }

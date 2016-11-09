@@ -1,3 +1,8 @@
+@foreach ($errors->all() as $error)
+    <div class='error_msg'>
+        {{$error}}
+    </div>
+@endforeach
 <form method="POST" action="{{route('mistake.store')}}">
     {{csrf_field()}}
     <div>
