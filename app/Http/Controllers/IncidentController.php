@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Incident;
 
 class IncidentController extends Controller
 {
@@ -34,7 +35,19 @@ class IncidentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'mistake_id'=>'required|integer',
+            'description'=>'required|string|max:22000',
+        ]);
+        $mistake = Mistake::find($request->mistake_id);
+        $mistake->iteration++;
+        $mistake->save();
+        $incident = new Incident;
+        $incident->description = $request->description;
+        $incident->mistake_id = $request->mistake_id;
+        $incident->when = date("Y-m-d H:i:s");
+        $incident->save();
+        return back();
     }
 
     /**
@@ -68,7 +81,6 @@ class IncidentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -79,6 +91,5 @@ class IncidentController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }
