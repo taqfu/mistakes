@@ -44,7 +44,9 @@ i       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3
             .content {
                 text-align: center;
             }
-
+            .inline{
+                display:inline;
+            }
             .title {
                 font-size: 84px;
             }
@@ -71,12 +73,12 @@ i       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3
         </style>
     </head>
     <body>
-       @yield('content') 
+       @yield('content')
     </body>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
-   
-    <script src="js/js.js"></script> 
+
+    <script src="js/js.js"></script>
 
 </html>
