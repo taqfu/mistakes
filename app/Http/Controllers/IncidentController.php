@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Incident;
+use App\Mistake;
 
 class IncidentController extends Controller
 {
