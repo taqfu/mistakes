@@ -5,7 +5,7 @@
     @forelse ($mistakes as $mistake)
         <div>
             {{$mistake->name}} - ${{$mistake->iteration}}
-            <input type='button' class='btn-primary show-button' value='New'
+            <input type='button' class='btn btn-primary show-button' value='New'
               id='show-create-incident{{$mistake->id}}' />
             <input type='button' class='btn-link show-button' value='[ + ]'
               id='show-incidents{{$mistake->id}}'/>
@@ -17,7 +17,11 @@
             @foreach($mistake->incidents as $incident)
                 <div>
                     {{$incident->when}}  - {{$incident->description }}
+                    @include ('Incident.destroy')
+                    <input type='button' class='btn btn-primary show-button' value='Edit' id='show-edit-incident{{$incident->id}}'/>
                 </div>
+
+                @include ('Incident.edit')
             @endforeach
         </div>
     @empty
