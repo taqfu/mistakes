@@ -5,6 +5,6 @@
         <textarea name='description' class='col-xs-6'></textarea>
     </div><div>
         <input type='submit' class='btn btn-primary'/>
-        <input type='submit' class='btn btn-primary cancel-button' id='cancel-create-incident{{$mistake->id}}'/>
+        <input type='button' class='btn btn-primary cancel-button' id='cancel-create-incident{{$mistake->id}}' value='Cancel'/>
     </div>
 </form>
