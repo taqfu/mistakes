@@ -2,8 +2,9 @@
     {{csrf_field()}}
     <input type='hidden' name='mistake_id' value="{{$mistake->id}}"/>
     <div>
-        <textarea name='description'></textarea>
+        <textarea name='description' class='col-xs-6'></textarea>
     </div><div>
-        <input type='submit' />
+        <input type='submit' class='btn btn-primary'/>
+        <input type='submit' class='btn btn-primary cancel-button' id='cancel-create-incident{{$incident->id}}'/>
     </div>
 </form>
