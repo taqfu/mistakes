@@ -5,15 +5,14 @@
 @endforeach
 <form method="POST" action="{{route('mistake.store')}}">
     {{csrf_field()}}
-    <div>
+    <div class='row'>
     Name:
-    </div><div>
+    </div><div class='row'>
         <input type='text' name='name' class='col-xs-6'/>
-    </div><div>
+    </div><div class='row'>
     Description:
-    </div><div>
+    </div><div class='row'>
         <textarea name='incident' class='col-xs-6'></textarea>
-    </div><div>
     </div><div>
         <input type='submit' />
     </div>
