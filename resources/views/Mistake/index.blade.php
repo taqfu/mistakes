@@ -15,8 +15,8 @@
         @include ('Incident.create')
         <div id='incidents{{$mistake->id}}' class='margin-left hidden'>
             @foreach($mistake->incidents as $incident)
-                <div>
-                    {{$incident->when}}  - {{$incident->description }}
+                <div class='well'>
+                    <strong>{{$incident->when}}</strong>  {{$incident->description }}
                     @include ('Incident.destroy')
                     <input type='button' class='btn btn-primary show-button' value='Edit' id='show-edit-incident{{$incident->id}}'/>
                 </div>
