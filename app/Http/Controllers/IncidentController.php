@@ -92,5 +92,10 @@ class IncidentController extends Controller
      */
     public function destroy($id)
     {
+        $incident = Incident::find($id);
+        $mistake = Mistake::find($incident->mistake_id);
+        $mistake->iteration--;
+        $mistake->save();
+        $incident->destroy();
     }
 }

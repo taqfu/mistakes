@@ -13,7 +13,7 @@
 use App\Mistake;
 Route::get('/', function () {
     return view('Mistake.index', [
-        "mistakes"=>Mistake::get(),
+        "mistakes"=>Mistake::orderBy('updated_at', 'desc')->get(),
     ]);
 });
 
