@@ -12,6 +12,7 @@
 */
 use App\Mistake;
 Route::get('/', function () {
+    Mistake::total_due();
     return view('Mistake.index', [
         "mistakes"=>Mistake::orderBy('updated_at', 'desc')->get(),
     ]);
