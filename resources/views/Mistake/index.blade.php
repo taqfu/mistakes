@@ -3,7 +3,6 @@
 @section('content')
     @include ("Mistake.create")
     @forelse ($mistakes as $mistake)
-        <div class='row'>
             <div>
                 {{$mistake->name}} - ${{$mistake->iteration}}
                 <input type='button' class='btn btn-primary show-button' value='New'
@@ -25,7 +24,6 @@
                     @include ('Incident.edit')
                 @endforeach
             </div>
-        </div>
     @empty
         You have no mistakes at this time.
     @endforelse

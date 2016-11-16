@@ -96,6 +96,7 @@ class IncidentController extends Controller
         $mistake = Mistake::find($incident->mistake_id);
         $mistake->iteration--;
         $mistake->save();
-        $incident->destroy();
+        Incident::destroy($id);
+        return back();
     }
 }

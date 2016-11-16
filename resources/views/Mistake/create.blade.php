@@ -3,7 +3,7 @@
         {{$error}}
     </div>
 @endforeach
-<form method="POST" action="{{route('mistake.store')}}" clas='row hidden'>
+<form method="POST" action="{{route('mistake.store')}}" class='row hidden' id='create-mistake'>
     {{csrf_field()}}
     <div class='col-xs-12'>
         Name:
@@ -16,7 +16,7 @@
         <textarea name='incident' class='col-xs-12 col-md-6'></textarea>
     </div><div class='col-xs-12'>
         <input type='submit' class='btn btn-primary'/>
-        <input type='button' class='cancel-button btn btn-primary' id='hide-create-mistake' value='Cancel'/>
+        <input type='button' class='cancel-button btn btn-primary' id='cancel-create-mistake' value='Cancel'/>
     </div>
 </form>
-<input type='button' class='hide-button btn btn-primary' id='hide-create-mistake' value='New Mistake'/>
+<input type='button' class='show-button btn btn-primary' id='show-create-mistake' value='New Mistake'/>
