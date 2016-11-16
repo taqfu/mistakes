@@ -10,7 +10,15 @@ class Mistake extends Model
         return $this->hasMany('App\Incident' );
     }
     public static function total_due(){        
-        var_dump("m/d/y g:i", strtotime('last Sunday'));
-        //$mistakes = Mistake::where('updated_at')
+        $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));
+        $mistakes = Mistake::where('updated_at', '>', $last_sunday)->get();
+        var_dump(count($mistakes));
+        foreach($mistakes as $mistake){
+            $incidents = Incident::where('mistake_id', $mistake->id)
+              ->where('created_at', '>', $last_sunday)->get();
+            foreach($incidents as $incident){
+                
+            }
+        }
     }
 }
