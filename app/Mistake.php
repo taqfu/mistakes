@@ -13,13 +13,26 @@ class Mistake extends Model
         $total = 0;
         $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));
         $mistakes = Mistake::where('updated_at', '>', $last_sunday)->get();
-        var_dump(count($mistakes));
         foreach($mistakes as $mistake){
-            $incidents = Incident::where('mistake_id', $mistake->id)
-              ->where('created_at', '>', $last_sunday)->get();
-            foreach($incidents as $incident){
-
+            $num_of_all_incidents = count(Incident::where('mistake_id', $mistake->id)->get());
+            $num_of_current_incidents = count(Incident::where('mistake_id', $mistake->id)
+              ->where('created_at', '>', $last_sunday)->get());
+            if ($num_of_all_incidents>1){
+                $total += $num_of_current_incidents;
             }
         }
+        return $total;
+    }
+    public static function total_due_for_mistake($mistake_id){
+        $total = 0;
+        $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));
+            $num_of_all_incidents = count(Incident::where('mistake_id', $mistake_id)->get());
+            $num_of_current_incidents = count(Incident::where('mistake_id', $mistake_id)
+              ->where('created_at', '>', $last_sunday)->get());
+            if ($num_of_all_incidents>1){
+                $total += $num_of_current_incidents;
+            }
+        return $total;
+
     }
 }

@@ -15,6 +15,8 @@ Route::get('/', function () {
     Mistake::total_due();
     return view('Mistake.index', [
         "mistakes"=>Mistake::orderBy('updated_at', 'desc')->get(),
+        "total_due"=>Mistake::total_due(),
+        "last_date"=>0,
     ]);
 });
 
