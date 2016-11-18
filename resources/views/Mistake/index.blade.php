@@ -9,6 +9,7 @@
     @forelse ($mistakes as $mistake)
         <?php
             $this_date = date("m/d/y", strtotime($mistake->updated_at));
+            $total_for_mistake = \App\Mistake::total_due_for_mistake($mistake->id);
         ?>
         @if ($this_date!=$last_date)
             <h2 class='text-center'><strong>
@@ -19,8 +20,7 @@
             ?> 
         @endif
             <div>
-                {{$mistake->name}} - ${{$mistake->iteration}} 
-                {{$total_for_mistake = \App\Mistake::total_due_for_mistake($mistake->id)}}
+                {{$mistake->name}} - {{$mistake->total}}
                 (+${{$total_for_mistake}})
                 <input type='button' class='btn-link show-button' value='[ + ]'
                   id='show-incidents{{$mistake->id}}'/>

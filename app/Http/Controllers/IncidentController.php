@@ -41,11 +41,13 @@ class IncidentController extends Controller
             'description'=>'required|string|max:22000',
         ]);
         $mistake = Mistake::find($request->mistake_id);
+        $mistake->total += $mistake->iteration;
         $mistake->iteration++;
         $mistake->save();
         $incident = new Incident;
         $incident->description = $request->description;
         $incident->mistake_id = $request->mistake_id;
+        $incident->iteration = $mistake->iteration;
         $incident->when = date("Y-m-d H:i:s");
         $incident->save();
         return back();
