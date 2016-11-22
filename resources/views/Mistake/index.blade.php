@@ -1,4 +1,6 @@
-
+<?php
+    $this_week_cleared=false;
+ ?>
 @extends ('master')
 
 @section('content')
@@ -6,18 +8,31 @@
     @include ("Mistake.create")
         ${{$total_due}} This Week
     </div>
+    <h1 class='text-center'><strong>
+        This Week
+    </h1>
     @forelse ($mistakes as $mistake)
         <?php
+            $all_mistakes_for_this_week = Mistake::fetch_all_mistakes_this_week();
             $this_date = date("m/d/y", strtotime($mistake->updated_at));
             $total_for_mistake = \App\Mistake::total_due_for_mistake($mistake->id);
         ?>
+
+        @if (count($all_mistakes_for_this_week)==0 && $this_week_cleared)
+            <div>None.</div>
+            <?php $this_week_cleared=false; ?>
+        @endif
+        @if (!in_array($mistake->id, $all_mistakes_for_this_week) && $this_week_cleared)
+            <hr>
+            <?php $this_week_cleared=false; ?>
+        @endif
         @if ($this_date!=$last_date)
             <h2 class='text-center'><strong>
                 {{$this_date}}
             </strong></h2>
-            <?php 
+            <?php
                 $last_date = $this_date;
-            ?> 
+            ?>
         @endif
             <div>
                 {{$mistake->name}} - {{$mistake->total}}

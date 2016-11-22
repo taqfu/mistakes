@@ -6,9 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mistake extends Model
 {
+    public static function fetch_all_mistakes_this_week(){
+        $mistake_id_arr=[];
+        $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));
+        $mistakes = Mistake::where('updated_at', '>', $last_sunday)->get();
+        foreach($mistakes as $mistake){
+            $mistake_id_arr[] = $mistake->id;
+        }
+        return $mistake_id_arr;
+    }
+
     public function incidents (){
         return $this->hasMany('App\Incident' );
     }
+
     public static function total_due(){
         $total = 0;
         $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));
