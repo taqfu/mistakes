@@ -47,6 +47,7 @@ class MistakeController extends Controller
         $incident->description = $request->incident;
         $incident->mistake_id = $mistake->id;
         $incident->when = date("Y-m-d H:i:s");
+        $incident->iteration = 0;
         $incident->save();
         return back();
         
