@@ -10,7 +10,7 @@
         ${{$total_due}} This Week
     </div>
     <div class='lead text-center'><strong>
-        Mistakes - This Week
+        Mistakes - This Week {{date("m/d/y", strtotime('last Sunday'))}} to {{date("m/d/y", strtotime('next Sunday'))}}
     </strong></div>
     @forelse ($mistakes as $mistake)
         <?php
@@ -34,23 +34,24 @@
             ?>
         @endif
             <div>
-                {{$mistake->name}} - {{$mistake->total}}
+                {{$mistake->name}} - ${{$mistake->total}}
                 (+${{$total_for_mistake}})
                 <input type='button' class='btn-link show-button' value='[ + ]'
                   id='show-incidents{{$mistake->id}}'/>
                 <input type='button' class='btn-link hidden hide-button' value='[ - ]'
                   id='hide-incidents{{$mistake->id}}'/>
-                <input type='button' class='btn btn-primary show-button' value='New'
+                <input type='button' class='btn btn-primary show-button' value='New Incident'
                   id='show-create-incident{{$mistake->id}}' />
             </div>
             @include ('Incident.create')
             <div id='incidents{{$mistake->id}}' class='margin-left hidden'>
                 @foreach($mistake->incidents as $incident)
                     <div class='well'>
-                        <strong>{{date('m/d/y g:i', strtotime($incident->when))}}</strong>
-                        - {{$incident->description }}
                         @include ('Incident.destroy')
                         <input type='button' class='btn btn-primary show-button' value='Edit' id='show-edit-incident{{$incident->id}}'/>
+                        <strong>${{$incident->iteration}} {{date('m/d/y g:i', strtotime($incident->when))}}</strong>
+                        - {{$incident->description }}
+
                     </div>
                     @include ('Incident.edit')
                 @endforeach
