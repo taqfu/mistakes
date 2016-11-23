@@ -42,18 +42,20 @@
                   id='hide-incidents{{$mistake->id}}'/>
                 <input type='button' class='btn btn-primary show-button' value='Incident'
                   id='show-create-incident{{$mistake->id}}' />
+                <input type='button' class='btn btn-primary show-button' value='Tag'
+                  id='show-create-tag{{$mistake->id}}' />
             </div>
             @include ('Incident.create')
             <div id='incidents{{$mistake->id}}' class='margin-left hidden'>
                 @foreach($mistake->incidents as $incident)
                     <div class='well'>
-                        <div>
                             @include ('Incident.destroy')
-                        </div><div>
+                            <strong>
+                                {{date('m/d/y g:i', strtotime($incident->when))}}
+                                - ${{$incident->iteration}} 
+                            </strong>
+                            {{$incident->description }}
                             <input type='button' class='btn btn-primary show-button' value='Edit' id='show-edit-incident{{$incident->id}}'/>
-                            <strong>${{$incident->iteration}} {{date('m/d/y g:i', strtotime($incident->when))}}</strong>
-                            - {{$incident->description }}
-                        </div>
                     </div>
                     @include ('Incident.edit')
                 @endforeach
