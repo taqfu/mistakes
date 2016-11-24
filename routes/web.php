@@ -22,3 +22,5 @@ Route::get('/', function () {
 
 Route::resource('mistake', 'MistakeController');
 Route::resource('incident', 'IncidentController');
+Route::resource('tag', 'TagController');
+Route::resource('TagType', 'TagTypeController');
