@@ -11,6 +11,8 @@
 |
 */
 use App\Mistake;
+use App\TagType;
+use App\Tag;
 Route::get('/', function () {
     Mistake::total_due();
     return view('Mistake.index', [
