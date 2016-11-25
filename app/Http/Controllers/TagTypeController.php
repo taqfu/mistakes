@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\TagType;
 class TagTypeController extends Controller
 {
     /**
@@ -34,7 +34,12 @@ class TagTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "newTagType"=>"required|string",
+        ]);
+        $tag_type = new TagType;
+        $tag_type->name = $request->newTagType;
+        $tag_type->save();
     }
 
     /**

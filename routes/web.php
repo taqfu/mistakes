@@ -15,8 +15,10 @@ Route::get('/', function () {
     Mistake::total_due();
     return view('Mistake.index', [
         "mistakes"=>Mistake::orderBy('updated_at', 'desc')->get(),
+        "tag_types"=>TagType::orderBy('name', 'asc')->get(),
         "total_due"=>Mistake::total_due(),
         "last_date"=>0,
+        "this_week_cleared"=>false,
     ]);
 });
 

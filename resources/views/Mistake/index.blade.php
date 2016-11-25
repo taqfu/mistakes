@@ -1,6 +1,5 @@
 <?php
     use App\Mistake;
-    $this_week_cleared=false;
  ?>
 @extends ('master')
 
@@ -9,6 +8,8 @@
     @include ("Mistake.create")
         ${{$total_due}} This Week
     </div>
+    @include ('TagType.create')
+    @include('TagType.index')
     <div class='lead text-center'><strong>
         Current Week - {{date("m/d/y", strtotime('last Sunday'))}} to {{date("m/d/y", strtotime('next Sunday'))}}
     </strong></div>
@@ -52,7 +53,7 @@
                             @include ('Incident.destroy')
                             <strong>
                                 {{date('m/d/y g:i', strtotime($incident->when))}}
-                                - ${{$incident->iteration}} 
+                                - ${{$incident->iteration}}
                             </strong>
                             {{$incident->description }}
                             <input type='button' class='btn btn-primary show-button' value='Edit' id='show-edit-incident{{$incident->id}}'/>
