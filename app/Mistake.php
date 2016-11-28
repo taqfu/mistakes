@@ -20,6 +20,9 @@ class Mistake extends Model
         return $this->hasMany('App\Incident' );
     }
 
+    public function tags (){
+        return $this->hasMany('App\tag', 'mistake' );
+    }
     public static function total_due(){
         $total = 0;
         $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));

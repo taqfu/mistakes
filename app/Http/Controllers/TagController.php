@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\tag;
 
 class TagController extends Controller
 {
@@ -34,7 +35,15 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+   
+        $this->validate($request, [
+            "tagType"=>"required|integer|min:1",
+            "mistakeID"=>"required|integer|min:1",
+        ]);
+        $tag = new Tag;
+        $tag->tag_type_id = $request->tagType;
+        $tag->mistake = $request->mistakeID;
+        $tag->save();
     }
 
     /**
@@ -79,6 +88,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tag::find($id)->delete();
+        return back();
     }
 }

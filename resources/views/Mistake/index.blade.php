@@ -45,7 +45,15 @@
                   id='show-create-incident{{$mistake->id}}' />
                 <input type='button' class='btn btn-primary show-button' value='Tag'
                   id='show-create-tag{{$mistake->id}}' />
+                <input type='button' class='btn btn-info hide-button hidden' value='Hide Tags'
+                  id='hide-create-tag{{$mistake->id}}' />
             </div>
+            <div id='mistake-tags{{$mistake}}' class='mistake-tags' >
+                @foreach ($mistake->tags as $tag)
+                    @include ("Tag.destroy")
+                @endforeach
+            </div>
+            @include ('Tag.create')
             @include ('Incident.create')
             <div id='incidents{{$mistake->id}}' class='margin-left hidden'>
                 @foreach($mistake->incidents as $incident)
