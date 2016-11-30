@@ -43,7 +43,6 @@ class IncidentController extends Controller
         $mistake = Mistake::find($request->mistake_id);
         $mistake->iteration++;
         $mistake->total += $mistake->iteration;
-
         $mistake->save();
         $incident = new Incident;
         $incident->description = $request->description;

@@ -1,5 +1,12 @@
-<form method="POST" action="{{route('TagType.store')}}">
+<form method="POST" action="{{route('TagType.store')}}" class='hidden col-md-3' id='create-tag-type'>
     {{csrf_field()}}
-    <input type='text' name='newTagType' required/>
-    <input type='submit' value='New Tag'/>
+    <div class='form-group'>
+        <label>Tag:</label>
+        <input type='text'  class='form-control' name='newTagType' required/>
+    </div>
+    <div class='form-group text-right'>
+        <input type='button' class='btn btn-primary cancel-button' id='cancel-create-tag-type' value='Cancel'/>
+        <input type='submit' value='New Tag' class='btn btn-primary' />
+    </div>
+    @include('TagType.index')
 </form>

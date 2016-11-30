@@ -41,10 +41,13 @@ class Mistake extends Model
         $total = 0;
         $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));
             $num_of_all_incidents = count(Incident::where('mistake_id', $mistake_id)->get());
-            $num_of_current_incidents = count(Incident::where('mistake_id', $mistake_id)
-              ->where('created_at', '>', $last_sunday)->get());
-            if ($num_of_all_incidents>1){
-                $total += $num_of_current_incidents;
+            $incidents = Incident::where('mistake_id', $mistake_id)
+              ->where('created_at', '>', $last_sunday)->get();
+            foreach ($incidents as $incident) {
+                    
+                if ($num_of_all_incidents>1){
+                    $total += $incident->iteration;
+                }
             }
         return $total;
 

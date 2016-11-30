@@ -5,11 +5,12 @@
 
 @section('content')
     <div class='lead'>
-    @include ("Mistake.create")
+        <input type='button' class='show-button btn btn-primary' id='show-create-mistake' value='New Mistake'/>
+        <input type='button' class='show-button btn btn-primary' id='show-create-tag-type' value='New Tag'/>
         ${{$total_due}} This Week
     </div>
+    @include ("Mistake.create")
     @include ('TagType.create')
-    @include('TagType.index')
     <div class='lead text-center'><strong>
         Current Week - {{date("m/d/y", strtotime('last Sunday'))}} to {{date("m/d/y", strtotime('next Sunday'))}}
     </strong></div>
