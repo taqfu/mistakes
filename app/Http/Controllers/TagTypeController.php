@@ -35,11 +35,12 @@ class TagTypeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "newTagType"=>"required|string",
+            "newTagType"=>"required|string|unique:tag_types,name",
         ]);
         $tag_type = new TagType;
         $tag_type->name = $request->newTagType;
         $tag_type->save();
+        return back();
     }
 
     /**

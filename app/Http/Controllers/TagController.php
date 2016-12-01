@@ -35,7 +35,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-   
+
         $this->validate($request, [
             "tagType"=>"required|integer|min:1",
             "mistakeID"=>"required|integer|min:1",
@@ -44,6 +44,7 @@ class TagController extends Controller
         $tag->tag_type_id = $request->tagType;
         $tag->mistake = $request->mistakeID;
         $tag->save();
+        return back();
     }
 
     /**

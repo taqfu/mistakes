@@ -1,5 +1,6 @@
 <?php
     use App\Mistake;
+    $last_week = date('W');
  ?>
 @extends ('master')
 
@@ -7,18 +8,21 @@
     <div class='lead'>
         <input type='button' class='show-button btn btn-primary' id='show-create-mistake' value='New Mistake'/>
         <input type='button' class='show-button btn btn-primary' id='show-create-tag-type' value='New Tag'/>
-        ${{$total_due}} This Week
     </div>
     @include ("Mistake.create")
     @include ('TagType.create')
     <div class='lead text-center'><strong>
-        Current Week - {{date("m/d/y", strtotime('last Sunday'))}} to {{date("m/d/y", strtotime('next Sunday'))}}
+        Current Week - {{date("m/d/y", strtotime('last Sunday'))}} to {{date("m/d/y", strtotime('next Sunday'))}} - ${{$total_due}}
     </strong></div>
     @forelse ($mistakes as $mistake)
         <?php
             $all_mistakes_for_this_week = Mistake::fetch_all_mistakes_this_week();
             $this_date = date("m/d/y", strtotime($mistake->updated_at));
+            $this_week = date("W", strtotime($mistake->updated_at));
+            $year = date("Y", strtotime($mistake->updated_at));
             $total_for_mistake = \App\Mistake::total_due_for_mistake($mistake->id);
+            $week_start = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week)));
+            $week_end = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week)));
         ?>
         @if (count($all_mistakes_for_this_week)==0 && !$this_week_cleared)
             <div class='text-center'>None.</div>
@@ -26,6 +30,13 @@
         @if ((count($all_mistakes_for_this_week)==0 || !in_array($mistake->id, $all_mistakes_for_this_week)) && !$this_week_cleared)
             <hr>
             <?php $this_week_cleared=true; ?>
+        @endif
+        @if ($this_week!=$last_week)
+            <div class='lead text-center'><strong>
+                Week #{{date('W', strtotime($mistake->updated_at))}}
+                 - {{$week_start}} to {{$week_end}}
+            </strong></div>
+            <?php $last_week = $this_week; ?>
         @endif
         @if ($this_date!=$last_date)
             <div class='lead text-center'><strong>
