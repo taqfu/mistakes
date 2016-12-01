@@ -1,6 +1,6 @@
 <?php
     use App\Mistake;
-    $last_week = date('W');
+    $last_week = 0;
  ?>
 @extends ('master')
 
@@ -11,9 +11,6 @@
     </div>
     @include ("Mistake.create")
     @include ('TagType.create')
-    <div class='lead text-center'><strong>
-        Current Week - {{date("m/d/y", strtotime('last Sunday'))}} to {{date("m/d/y", strtotime('next Sunday'))}} - ${{$total_due}}
-    </strong></div>
     @forelse ($mistakes as $mistake)
         <?php
             $all_mistakes_for_this_week = Mistake::fetch_all_mistakes_this_week();
@@ -21,20 +18,20 @@
             $this_week = date("W", strtotime($mistake->updated_at));
             $year = date("Y", strtotime($mistake->updated_at));
             $total_for_mistake = \App\Mistake::total_due_for_mistake($mistake->id);
-            $week_start = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week)));
-            $week_end = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week)));
+            $week_start = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week-1) . 7));
+            $week_end = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week) . 6));
         ?>
         @if (count($all_mistakes_for_this_week)==0 && !$this_week_cleared)
             <div class='text-center'>None.</div>
         @endif
         @if ((count($all_mistakes_for_this_week)==0 || !in_array($mistake->id, $all_mistakes_for_this_week)) && !$this_week_cleared)
-            <hr>
             <?php $this_week_cleared=true; ?>
         @endif
         @if ($this_week!=$last_week)
+            <hr>
             <div class='lead text-center'><strong>
                 Week #{{date('W', strtotime($mistake->updated_at))}}
-                 - {{$week_start}} to {{$week_end}}
+                 - {{$week_start}} to {{$week_end}} - ${{Mistake::fetch_total_due_for_week($this_week, $year)}}
             </strong></div>
             <?php $last_week = $this_week; ?>
         @endif
@@ -60,13 +57,13 @@
                 <input type='button' class='btn btn-info hide-button hidden' value='Hide Tags'
                   id='hide-create-tag{{$mistake->id}}' />
             </div>
+            @include ('Tag.create')
+            @include ('Incident.create')
             <div id='mistake-tags{{$mistake}}' class='mistake-tags' >
                 @foreach ($mistake->tags as $tag)
                     @include ("Tag.destroy")
                 @endforeach
             </div>
-            @include ('Tag.create')
-            @include ('Incident.create')
             <div id='incidents{{$mistake->id}}' class='margin-left hidden'>
                 @foreach($mistake->incidents as $incident)
                     <div class='well'>

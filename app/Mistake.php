@@ -23,14 +23,17 @@ class Mistake extends Model
     public function tags (){
         return $this->hasMany('App\tag', 'mistake' );
     }
-    public static function total_due(){
+    public static function fetch_total_due_for_week($week, $year){
+        $week_start = date('Y-m-d', strtotime($year . 'W' . sprintf('%02d', $week-1) . 7));
+        $week_end = date('Y-m-d', strtotime($year . 'W' . sprintf('%02d', $week) . 6));
         $total = 0;
-        $last_sunday = date("Y-m-d H:i:s", strtotime('last Sunday'));
-        $mistakes = Mistake::where('updated_at', '>', $last_sunday)->get();
+        $mistakes = Mistake::where('updated_at', '>=', $week_start)
+          ->where('updated_at', '<=', $week_end)->get();
         foreach($mistakes as $mistake){
             $num_of_all_incidents = count(Incident::where('mistake_id', $mistake->id)->get());
             foreach(Incident::where('mistake_id', $mistake->id)
-              ->where('created_at', '>', $last_sunday)->get() as $incident){
+              ->where('updated_at', '>=', $week_start)
+              ->where('updated_at', '<=', $week_end)->get() as $incident){
                 $total += $incident->iteration;
             }
         }

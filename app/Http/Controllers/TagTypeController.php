@@ -85,6 +85,9 @@ class TagTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag_type = TagType::find($id); 
+        $tag_type->deactivated_at = date("Y-m-d H:i:s"); 
+        $tag_type->save();
+        return back();
     }
 }
