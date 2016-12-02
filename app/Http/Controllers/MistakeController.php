@@ -41,7 +41,7 @@ class MistakeController extends Controller
             'incident'=>'required|string|max:22000',
         ]);
         $mistake = new Mistake;
-        $mistake->name = $request->name;
+        $mistake->name = $request->mistakeName;
         $mistake->save();
         $incident = new Incident;
         $incident->description = $request->incident;
