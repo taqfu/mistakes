@@ -19,7 +19,8 @@
             $year = date("Y", strtotime($mistake->updated_at));
             $total_for_mistake = \App\Mistake::total_due_for_mistake($mistake->id);
             $week_start = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week-1) . 7));
-            $week_end = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week) . 6));
+            $week_end = date('m/d/y', strtotime($year . 'W' . sprintf('%02d', $this_week) . 6));   
+            $num_of_incidents = $mistake->iteration + 1;
         ?>
         @if (count($all_mistakes_for_this_week)==0 && !$this_week_cleared)
             <div class='text-center'>None.</div>
@@ -43,9 +44,15 @@
                 $last_date = $this_date;
             ?>
         @endif
-            <div>
+            <div class='margin-top'>
                 {{$mistake->name}} - ${{$mistake->total}}
                 (+${{$total_for_mistake}})
+                - {{$num_of_incidents}} 
+                @if ($num_of_incidents==1)
+                    incident
+                @else 
+                    incidents
+                @endif
                 <input type='button' class='btn-link show-button' value='[ + ]'
                   id='show-incidents{{$mistake->id}}'/>
                 <input type='button' class='btn-link hidden hide-button' value='[ - ]'
