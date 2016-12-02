@@ -15,7 +15,8 @@ use App\TagType;
 use App\Tag;
 Route::get('/', function () {
     return view('Mistake.index', [
-        "mistakes"=>Mistake::orderBy('updated_at', 'desc')->get(),
+        "mistakes"=>Mistake::whereNull('deactivated_at')->
+          orderBy('updated_at', 'desc')->get(),
         "tag_types"=>TagType::whereNull('deactivated_at')->orderBy('name', 'asc')->get(),
         "last_date"=>0,
         "this_week_cleared"=>false,

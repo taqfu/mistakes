@@ -93,14 +93,15 @@ class MistakeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Mistake::find($id)->destroy();
-        $incidents = Incident::where('mistake_id', $id)->get();
-        foreach ($incident as $incindent){
-            $incident->mistake_id=0;
-            $incident->save();
-        }
-        
+        $this->validate($request, [
+            "deactivation_reason"=>"required|min:1"
+        ]);
+        $mistake = Mistake::find($id);
+        $mistake->deactivated_at = date("Y-m-d H:i:s");
+        $mistake->deactivation_reason = $request->deactivation_reason;
+        $mistake->save();
+        return back(); 
     }
 }

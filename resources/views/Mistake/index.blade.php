@@ -65,6 +65,11 @@
                   id='show-create-tag{{$mistake->id}}' />
                 <input type='button' class='btn btn-info hide-button hidden'
                   value='Tag' id='hide-create-tag{{$mistake->id}}' />
+                <input type='button' class='btn btn-primary show-button'
+                  value='Delete' id='show-destroy-mistake{{$mistake->id}}' />
+                <input type='button' class='btn btn-info hide-button hidden'
+                  value='Hide' id='hide-destroy-mistake{{$mistake->id}}' />
+                @include ('Mistake.destroy')
             </div>
             @include ('Tag.create')
             @include ('Incident.create')
