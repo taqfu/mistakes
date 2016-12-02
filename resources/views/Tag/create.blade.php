@@ -4,7 +4,7 @@
             {{csrf_field()}}
             <input type='hidden' name='tagType' value='{{$tag_type->id}}' />
             <input type='hidden' name='mistakeID' value='{{$mistake->id}}' />
-            <input type='submit' value='{{$tag_type->name}}' class='btn btn-info'/>
+            <input type='submit' value='{{$tag_type->name}}' class='btn btn-default'/>
         </form>
     @endforeach
 </div>

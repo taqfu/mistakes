@@ -50,12 +50,14 @@
                   id='show-incidents{{$mistake->id}}'/>
                 <input type='button' class='btn-link hidden hide-button' value='[ - ]'
                   id='hide-incidents{{$mistake->id}}'/>
-                <input type='button' class='btn btn-primary show-button' value='Incident'
-                  id='show-create-incident{{$mistake->id}}' />
+                <input type='button' class='btn btn-primary show-button'
+                  value='Incident' id='show-create-incident{{$mistake->id}}' />
+                <input type='button' class='btn btn-info hide-button hidden'
+                  id='hide-create-incident{{$mistake->id}}' value='Incident '/>
                 <input type='button' class='btn btn-primary show-button' value='Tag'
                   id='show-create-tag{{$mistake->id}}' />
-                <input type='button' class='btn btn-info hide-button hidden' value='Hide Tags'
-                  id='hide-create-tag{{$mistake->id}}' />
+                <input type='button' class='btn btn-info hide-button hidden'
+                  value='Tag' id='hide-create-tag{{$mistake->id}}' />
             </div>
             @include ('Tag.create')
             @include ('Incident.create')
