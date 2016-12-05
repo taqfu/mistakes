@@ -37,7 +37,7 @@ class MistakeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required|string|max:255|unique:mistakes,name',
+            'mistakeName'=>'required|string|max:255|unique:mistakes,name',
             'incident'=>'required|string|max:22000',
         ]);
         $mistake = new Mistake;
